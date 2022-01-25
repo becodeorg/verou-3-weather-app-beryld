@@ -5,11 +5,55 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
-    <title>Weather</title>
+    <title id="titleCity">Weather</title>
 </head>
 <body>
+    <section id="main-container">
+        <img src="./mage/dog.png" alt="I'll put a logo or an image here ">
+        <input id="city" placeholder="Type your city here" type="text">
+        <!-- <label for="city"></label> -->
+        <button id="cityButt"> Submit</button>
+    </section>
+    <div id="today-date"></div>
+    <div id="name-city"></div>
+    <div id="current"></div>
+    <div id="illu-current"><img src="" alt=""></div>
+    <div id="fiveDays">
+        <div id="day-plus-one">
+            <div id="day-one"></div>
+            <div id="line-one" >
+                <img id="icon-one" src="" alt="">
+                <div id="humidity-one"></div>
+            </div>
+            <div id="temp-one"></div>
+        </div>
+        <div id="day-plus-two">
+            <div id="day-two"></div>
+            <div id="line-two">
+                <img id="icon-two" src="" alt="">
+                <div id="humidity-two"></div>
+            </div>
+            <div id="temp-two"></div>
+        </div>
+        <div id="day-plus-three">
+            <div id="day-three"></div>
+            <div id="line-three">
+                <img id="icon-three" src="" alt="">
+                <div id="humidity-three"></div>
+            </div>
+            <div id="temp-three"></div>
+        </div>
+        <div id="day-plus-four">
+            <div id="day-four"></div>
+            <div id="line-four">
+                <img id="icon-four" src="" alt="">
+                <div id="humidity-four"></div>
+            </div>
+            <div id="temp-four"></div>
+        </div>
+        
     
-
-    <script src="./meteo.js"></script>
+    </div>
+    <script type="module" src="./meteo.js"></script>
 </body>
 </html>
