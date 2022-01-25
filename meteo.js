@@ -36,7 +36,7 @@ let nameCity;
 
 cityButton.onclick = () => {
   fetch(
-    "http://api.openweathermap.org/geo/1.0/direct?q=" +
+    "https://api.openweathermap.org/geo/1.0/direct?q=" +
       cityInput.value +
       "&limit=1&appid=" +
       data.key
@@ -91,10 +91,10 @@ cityButton.onclick = () => {
         dayFourName.textContent = daysOfWeek[days+2];
         dayFourTemp.textContent=  parseInt(response.daily[4].temp.day);
         
-        dayOneIcon.src="http://openweathermap.org/img/wn/"+ response.daily[1].weather[0].icon +"@2x.png";
-        dayTwoIcon.src="http://openweathermap.org/img/wn/"+ response.daily[2].weather[0].icon +"@2x.png";
-        dayThreeIcon.src="http://openweathermap.org/img/wn/"+ response.daily[3].weather[0].icon +"@2x.png";
-        dayFourIcon.src="http://openweathermap.org/img/wn/"+ response.daily[4].weather[0].icon +"@2x.png";
+        dayOneIcon.src="https://openweathermap.org/img/wn/"+ response.daily[1].weather[0].icon +"@2x.png";
+        dayTwoIcon.src="https://openweathermap.org/img/wn/"+ response.daily[2].weather[0].icon +"@2x.png";
+        dayThreeIcon.src="https://openweathermap.org/img/wn/"+ response.daily[3].weather[0].icon +"@2x.png";
+        dayFourIcon.src="https://openweathermap.org/img/wn/"+ response.daily[4].weather[0].icon +"@2x.png";
         
 
 
