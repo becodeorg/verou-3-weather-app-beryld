@@ -1,5 +1,122 @@
-#main-container{
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', sans-serif;
+}
+#main-container-research{
     display: flex;
     flex-direction: column;
-    width: 50%;
+    align-items: center;
+    /* height: 30%; */
+    padding: 5%;
+}
+#img-container{
+    height: 80%;
+    padding-bottom: 10%;
+    opacity: 0.8;
+    filter: grayscale();
+
+}
+#bodybackA{
+    height: 100vh;
+    background-size: cover; 
+    
+}
+
+#container-results{
+    /* height: 70%; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* gap: 10px; */
+  
+    
+}
+.current-results{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+#city{
+    background: transparent;
+    border: none;
+    padding-bottom: 7px;
+    box-shadow: inset 0 0 0 1000px rgba(223, 223, 223, 0.39);
+    text-align: center;
+    
+}
+#cityButt{
+    padding: 6px 14px;
+    border-radius: 6px;
+    border: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    background: #6E6D70;
+    box-shadow: 0px 0.5px 1px rgba(0, 0, 0, 0.1), inset 0px 0.5px 0.5px rgba(255, 255, 255, 0.5), 0px 0px 0px 0.5px rgba(0, 0, 0, 0.12);
+    color: #DFDEDF;
+}
+#cityButt:focus{
+    box-shadow: inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2), 0px 0.5px 1px rgba(0, 0, 0, 0.1), 0px 0px 0px 3.5px rgba(173, 173, 173, 0.521);
+  outline: 0;
+}
+#today-date{
+    color: rgba(255, 255, 255, 0.877);
+}
+#name-city{
+    color: rgba(255, 255, 255, 0.808);
+    font-size: 20px;
+}
+#current{
+    /* height: 10%; */
+    font-size: 80px;
+    color: rgba(255, 255, 255, 0.808);
+    font-weight:100 ;
+    letter-spacing: 0;
+}
+
+#fiveDays{
+    box-shadow: inset 0 0 0 1000px rgba(103, 103, 109, 0.651);
+    /* padding: 10%; */
+    width: 80%;
+    border-radius: 4%;
+    border:  3px solid rgba(36, 34, 36, 0.253);
+}
+.day{
+    display: flex;
+    flex-direction: row;
+    height:8vh;
+    /* width: 100vw; */
+    margin: 10%;
+    align-items: center;
+    
+    color: rgba(236, 234, 234, 0.897);
+    font-weight: bolder;
+    
+    
+}
+.day-name{
+    /* width: 33vw; */
+    
+}
+.icon-pop{
+    height: 100%;
+    /* width: 33vw; */
+    
+
+}
+.ic{
+    height: 80%;
+    
+    
+    
+}
+.popic{
+    font-size: 10px;
+    text-align: center;
+    
+}
+.temperature{
+    /* width: 33vw; */
+text-align: right;
 }

@@ -1,59 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css" />
     <title id="titleCity">Weather</title>
-</head>
-<body>
-    <section id="main-container">
-        <img src="./mage/dog.png" alt="I'll put a logo or an image here ">
-        <input id="city" placeholder="Type your city here" type="text">
+  </head>
+  <body>
+    <div id="bodybackA">
+      <section id="main-container-research">
+        <!-- <img
+          id="img-container"
+          src="./mage/season.png"
+          alt="I'll put a logo or an image here "
+        /> -->
+        <input id="city" placeholder="Type your city here" type="text" />
         <!-- <label for="city"></label> -->
-        <button id="cityButt"> Submit</button>
-    </section>
-    <div id="today-date"></div>
-    <div id="name-city"></div>
-    <div id="current"></div>
-    <div id="illu-current"><img src="" alt=""></div>
-    <div id="fiveDays">
-        <div id="day-plus-one">
-            <div id="day-one"></div>
-            <div id="line-one" >
-                <img id="icon-one" src="" alt="">
-                <div id="humidity-one"></div>
-            </div>
-            <div id="temp-one"></div>
+        <button id="cityButt">Submit</button>
+      </section>
+      <section id="container-results" style="visibility: hidden;">
+        <div class="current-results">
+          <div id="today-date"></div>
+          <div id="name-city"></div>
+
+          <div id="illu-current"><img src="" alt="" /></div>
         </div>
-        <div id="day-plus-two">
-            <div id="day-two"></div>
-            <div id="line-two">
-                <img id="icon-two" src="" alt="">
-                <div id="humidity-two"></div>
+        <div id="current"></div>
+        <div id="fiveDays">
+          <div class="day" id="day-plus-one">
+            <div class="day-name" id="day-one"></div>
+
+            <div class="icon-pop" id="line-one">
+              <img class="ic" id="icon-one" src="" alt="" />
+              <div class="popic" id="popidity-one"></div>
             </div>
-            <div id="temp-two"></div>
-        </div>
-        <div id="day-plus-three">
-            <div id="day-three"></div>
-            <div id="line-three">
-                <img id="icon-three" src="" alt="">
-                <div id="humidity-three"></div>
+            <div class="temperature" id="temp-one"></div>
+          </div>
+          <div class="day" id="day-plus-two">
+            <div class="day-name" id="day-two"></div>
+            <div class="icon-pop" id="line-two">
+              <img class="ic" id="icon-two" src="" alt="" />
+              <div class="popic" id="popidity-two"></div>
             </div>
-            <div id="temp-three"></div>
-        </div>
-        <div id="day-plus-four">
-            <div id="day-four"></div>
-            <div id="line-four">
-                <img id="icon-four" src="" alt="">
-                <div id="humidity-four"></div>
+            <div class="temperature" id="temp-two"></div>
+          </div>
+          <div class="day" id="day-plus-three">
+            <div class="day-name" id="day-three"></div>
+            <div class="icon-pop" id="line-three">
+              <img class="ic" id="icon-three" src="" alt="" />
+              <div class="popic" id="popidity-three"></div>
             </div>
-            <div id="temp-four"></div>
+            <div class="temperature" id="temp-three"></div>
+          </div>
+          <div class="day" id="day-plus-four">
+            <div class="day-name" id="day-four"></div>
+            <div class="icon-pop" id="line-four">
+              <img class="ic" id="icon-four" src="" alt="" />
+              <div class="popic" id="popidity-four"></div>
+            </div>
+            <div class="temperature" id="temp-four"></div>
+          </div>
         </div>
-        
-    
+      </section>
     </div>
     <script type="module" src="./meteo.js"></script>
-</body>
+  </body>
 </html>
