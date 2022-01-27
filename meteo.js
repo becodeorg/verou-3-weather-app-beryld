@@ -101,10 +101,10 @@ cityButton.onclick = () => {
           response.daily[4].weather[0].icon +
           "@2x.png";
 
-        dayOnepop.textContent = response.daily[1].pop * 100 + " %";
-        dayTwopop.textContent = response.daily[2].pop * 100 + " %";
-        dayThreepop.textContent = response.daily[3].pop * 100 + " %";
-        dayFourpop.textContent = response.daily[4].pop * 100 + " %";
+        dayOnepop.textContent = parseInt(response.daily[1].pop * 100) + " %";
+        dayTwopop.textContent = parseInt(response.daily[2].pop * 100 )+ " %";
+        dayThreepop.textContent = parseInt(response.daily[3].pop * 100 )+ " %";
+        dayFourpop.textContent = parseInt( response.daily[4].pop * 100) + " %";
         hideIt.style.visibility="visible";
       });
   }
