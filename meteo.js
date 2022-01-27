@@ -4,8 +4,6 @@
 //      home page example ? 
 //      Background transitions  
 //      Icons effects arriving from right to left
-
-
 import { data } from "./config.js";
 const {
   cityButton,
@@ -23,7 +21,18 @@ const {
 } = consts();
 var { lat, lon, nameCity, currentDate, days } = vars();
 
+cityInput.value="bruxelles";
+// cityButton.click();
+window.onload= function () {cityButton.click()
+
+}
+// cityInput.value = ""
+
+// console.log(cityInput.value);
+
+
 cityButton.onclick = () => {
+
   fetch(
     "https://api.openweathermap.org/geo/1.0/direct?q=" +
       cityInput.value +
@@ -116,6 +125,7 @@ cityButton.onclick = () => {
           "url('" + unsplResponse.results[0].urls.small + ")";
       });
   }
+  
 };
 
 //TODO: fetch unix time stamp from API to display current time of city researched
