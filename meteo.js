@@ -24,12 +24,19 @@ var { lat, lon, nameCity, currentDate, days } = vars();
 cityInput.value="bruxelles";
 // cityButton.click();
 window.onload= function () {cityButton.click()
-
 }
-// cityInput.value = ""
 
-// console.log(cityInput.value);
+async function inputStart()
+{  cityInput.value = ""}
 
+
+
+cityInput.addEventListener("keyup", function (event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    cityButton.click();
+  }
+});
 
 cityButton.onclick = () => {
 
@@ -51,6 +58,7 @@ cityButton.onclick = () => {
       nameCity = responseLat[0].name;
       fetchmeteo();
       imgFishing();
+      inputStart()
     });
 
   async function fetchmeteo() {
