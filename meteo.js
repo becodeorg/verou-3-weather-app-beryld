@@ -1,3 +1,11 @@
+//TODO: Need the big screens css 
+//      button styling
+//      searchbar styling
+//      home page example ? 
+//      Background transitions  
+//      Icons effects arriving from right to left
+
+
 import { data } from "./config.js";
 const {
   cityButton,
@@ -76,6 +84,9 @@ cityButton.onclick = () => {
             "https://openweathermap.org/img/wn/" +
             response.daily[i + 1].weather[0].icon +
             "@2x.png";
+            if(response.daily[i + 1].weather[0].icon == "13d"){
+              icons[i].style.filter=" invert(100%)"
+            }
         }
         for (let index = 0; index < 4; index++) {
           daypops[index].textContent =
