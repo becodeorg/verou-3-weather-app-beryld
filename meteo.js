@@ -18,10 +18,7 @@ const {
   dayTwoIcon,
   dayThreeIcon,
   dayFourIcon,
-  dayOnepop,
-  dayTwopop,
-  dayThreepop,
-  dayFourpop,
+  daypops,
   bodyback,
   hideIt,
 } = consts();
@@ -75,6 +72,8 @@ cityButton.onclick = () => {
         today.textContent = parseInt(response.current.temp) + "";
         console.log(cityInput.value);
 
+        //TODO: FOR LOOP
+        
         dayOneName.textContent = daysOfWeek[days - 1];
         dayOneTemp.textContent = parseInt(response.daily[1].temp.day) + "°";
         dayTwoName.textContent = daysOfWeek[days];
@@ -84,6 +83,7 @@ cityButton.onclick = () => {
         dayFourName.textContent = daysOfWeek[days + 2];
         dayFourTemp.textContent = parseInt(response.daily[4].temp.day) + "°";
 
+        //TODO: FOR LOOP
         dayOneIcon.src =
           "https://openweathermap.org/img/wn/" +
           response.daily[1].weather[0].icon +
@@ -100,12 +100,14 @@ cityButton.onclick = () => {
           "https://openweathermap.org/img/wn/" +
           response.daily[4].weather[0].icon +
           "@2x.png";
-
-        dayOnepop.textContent = parseInt(response.daily[1].pop * 100) + " %";
-        dayTwopop.textContent = parseInt(response.daily[2].pop * 100 )+ " %";
-        dayThreepop.textContent = parseInt(response.daily[3].pop * 100 )+ " %";
-        dayFourpop.textContent = parseInt( response.daily[4].pop * 100) + " %";
-        hideIt.style.visibility="visible";
+          /*dayOnepop.textContent = parseInt(response.daily[1].pop * 100) + " %";
+          dayTwopop.textContent = parseInt(response.daily[2].pop * 100 )+ " %";
+          dayThreepop.textContent = parseInt(response.daily[3].pop * 100 )+ " %";
+          dayFourpop.textContent = parseInt( response.daily[4].pop * 100) + " %"; */
+          for (let index = 0; index < 4; index++) {
+            daypops[index].textContent= parseInt(response.daily[index+1].pop *100) + " %"
+            }
+          hideIt.style.visibility="visible";
       });
   }
   async function imgFishing() {
@@ -171,10 +173,7 @@ function consts() {
   const dayTwoIcon = document.getElementById("icon-two");
   const dayThreeIcon = document.getElementById("icon-three");
   const dayFourIcon = document.getElementById("icon-four");
-  const dayOnepop = document.getElementById("popidity-one");
-  const dayTwopop = document.getElementById("popidity-two");
-  const dayThreepop = document.getElementById("popidity-three");
-  const dayFourpop = document.getElementById("popidity-four");
+  const daypops = document.querySelectorAll('.popic');
   const bodyback = document.getElementById('bodybackA');
   const hideIt = document.getElementById('container-results');
   return {
@@ -196,11 +195,8 @@ function consts() {
     dayTwoIcon,
     dayThreeIcon,
     dayFourIcon,
-    dayOnepop,
-    dayTwopop,
-    dayThreepop,
-    dayFourpop,
     bodyback,
     hideIt,
+    daypops,
   };
 }
