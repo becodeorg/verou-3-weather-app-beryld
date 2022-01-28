@@ -1,14 +1,13 @@
-//TODO: Need the big screens css 
-//      button styling
-//      searchbar styling
-//      home page example ? 
-//      Background transitions  
-//      Icons effects arriving from right to left
+//TODO:   Background transitions  
+//        Icons effects arriving from right to left
+//        Chart
+
+
 import { data } from "./config.js";
 const {
   cityButton,
   cityInput,
-  dating,
+  dating, // let's keep it in case needed to show date 
   dayNames,
   cityName,
   today,
@@ -24,14 +23,14 @@ var { lat, lon, nameCity, currentDate, days } = vars();
 
 
 
+
+
+
+
+
+
 cityInput.value="Taiwan";
-// cityButton.click();
-window.onload= function () {cityButton.click()
-}
-
-async function inputStart()
-{  cityInput.value = ""}
-
+window.onload= function () {cityButton.click()}
 
 
 cityInput.addEventListener("keyup", function (event) {
@@ -51,7 +50,7 @@ cityButton.onclick = () => {
   )
     .then(function (responseLat) {
       if (!responseLat.ok) {
-        throw new Error("http not working" + response.status);
+        throw new Error(" Biiiiiiiiip " + response.status);
       }
       return responseLat.json();
     })
@@ -61,7 +60,7 @@ cityButton.onclick = () => {
       nameCity = responseLat[0].name;
       fetchmeteo();
       imgFishing();
-      inputStart()
+      // inputStart()
     });
 
   async function fetchmeteo() {
@@ -76,7 +75,7 @@ cityButton.onclick = () => {
       .then(function (response) {
         if (!response.ok) {
           throw new Error(
-            `HTTP error! What did you try to do ? status: ${response.status}`
+            `HTTP error! Biiiiiiiip status: ${response.status}`
           );
         }
         return response.json();
@@ -88,7 +87,7 @@ cityButton.onclick = () => {
         today.textContent = parseInt(response.current.temp) + "";
 
         
-        
+          //4 days names of day 
         for (let i = 0; i < 4; i++) {
           let dayMax = days - 1 + i;
             if (dayMax >= 7) {
@@ -97,9 +96,8 @@ cityButton.onclick = () => {
               dayNames[i].textContent = daysOfWeek[dayMax];
               temperat[i].textContent = parseInt(response.daily[i + 1].temp.day) + "°";
         }
-
+            // 4 days t° results :
         for (let i = 0; i < 4; i++) {
-          
           icons[i].src =
             "https://openweathermap.org/img/wn/" +
             response.daily[i + 1].weather[0].icon +
@@ -109,6 +107,7 @@ cityButton.onclick = () => {
               
             }
         }
+            //4 days pop results : 
         for (let index = 0; index < 4; index++) {
           daypops[index].textContent =
             parseInt(response.daily[index + 1].pop * 100) + " %";
@@ -116,6 +115,9 @@ cityButton.onclick = () => {
         hideIt.style.visibility = "visible";
       });
   }
+
+
+
   async function imgFishing() {
     fetch(
       "https://api.unsplash.com/search/photos?query=" +
@@ -126,7 +128,7 @@ cityButton.onclick = () => {
       .then(function (unsplResponse) {
         if (!unsplResponse.ok) {
           throw new Error(
-            `HTTP error! What did you try to do ? status: ${unsplResponse.status}`
+            `HTTP error! Biiiiiiiiiiiip status: ${unsplResponse.status}`
           );
         }
         return unsplResponse.json();
@@ -135,9 +137,9 @@ cityButton.onclick = () => {
       .then(function (unsplResponse) {
         
         const imgArraySize = unsplResponse.results.length
-        console.log(imgArraySize);
+        
         const choise = Math.floor(Math.random() * imgArraySize)
-        console.log(choise);
+        
 
         bodyback.style.backgroundImage =
         "linear-gradient(rgba(255, 255, 255, .7), rgba(255,255,255,0.5)), "+ 
@@ -150,10 +152,25 @@ cityButton.onclick = () => {
   
 };
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //TODO: fetch unix time stamp from API to display current time of city researched
 function vars() {
   var todayla = new Date();
-  console.log(todayla);
   var days = todayla.getDay() + 1;
   console.log(days);
   var currentDate =
@@ -172,9 +189,7 @@ function consts() {
   const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
   const cityInput = document.getElementById("city");
   const cityButton = document.getElementById("cityButt");
-  const titleCityResult = document.getElementById("titleCity");
   const today = document.getElementById("current");
-  const fiveOnes = document.getElementById("fiveDays");
   const dating = document.getElementById("today-date");
   const cityName = document.getElementById("name-city");
   const daypops = document.querySelectorAll(".popic");
@@ -200,39 +215,6 @@ function consts() {
     feet,
   };
 }
-/*
-          dayOneName.textContent = daysOfWeek[days - 1];
-          dayTwoName.textContent = daysOfWeek[days];
-          dayThreeName.textContent = daysOfWeek[days + 1];
-          dayFourName.textContent = daysOfWeek[days + 2];
 
-          dayOneTemp.textContent = parseInt(response.daily[1].temp.day) + "°";
-          dayTwoTemp.textContent = parseInt(response.daily[2].temp.day) + "°";
-          dayThreeTemp.textContent = parseInt(response.daily[3].temp.day) + "°";
-          dayFourTemp.textContent = parseInt(response.daily[4].temp.day) + "°";
-          
-          dayOnepop.textContent = parseInt(response.daily[1].pop * 100) + " %";
-          dayTwopop.textContent = parseInt(response.daily[2].pop * 100 )+ " %";
-          dayThreepop.textContent = parseInt(response.daily[3].pop * 100 )+ " %";
-          dayFourpop.textContent = parseInt( response.daily[4].pop * 100) + " %"; 
-
-          
-        dayOneIcon.src =
-        "https://openweathermap.org/img/wn/" +
-        response.daily[1].weather[0].icon +
-        "@2x.png";
-        
-        dayTwoIcon.src =
-        "https://openweathermap.org/img/wn/" +
-        response.daily[2].weather[0].icon +
-        "@2x.png";
-        
-        dayThreeIcon.src =
-        "https://openweathermap.org/img/wn/" +
-        response.daily[3].weather[0].icon +
-        "@2x.png";
-        
-        dayFourIcon.src =
-        "https://openweathermap.org/img/wn/" +
-        response.daily[4].weather[0].icon +
-        "@2x.png";*/
+// async function inputStart()
+// {  cityInput.value = ""}
