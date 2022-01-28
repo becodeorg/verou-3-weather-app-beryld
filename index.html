@@ -20,16 +20,17 @@
         /> -->
         <input id="city" placeholder="Type your city here" type="text" />
         <!-- <label for="city"></label> -->
-        <button id="cityButt">&#8627</button>
+        <button id="cityButt">&#8594</button>
       </section>
       <section id="container-results" style="visibility: hidden;">
         <div class="current-results">
           <div id="today-date"></div>
           <div id="name-city"></div>
 
-          <div id="illu-current"><img src="" alt="" /></div>
+          
+          <div id="current"></div>
         </div>
-        <div id="current"></div>
+       
         <div id="fiveDays">
           <div class="day" id="day-plus-one">
             <div class="day-name" id="day-one"></div>
@@ -66,7 +67,16 @@
           </div>
         </div>
       </section>
+      <footer>
+          <div>
+          OpenWeather (TM) as a weather data provider
+        </div>
+        <div id="foot">
+
+        </div>
+    </footer>
     </div>
+    
     <script type="module" src="./meteo.js"></script>
   </body>
 </html>

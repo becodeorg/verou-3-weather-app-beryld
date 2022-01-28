@@ -18,10 +18,13 @@ const {
   daypops,
   bodyback,
   hideIt,
+  feet,
 } = consts();
 var { lat, lon, nameCity, currentDate, days } = vars();
 
-cityInput.value="bruxelles";
+
+
+cityInput.value="Taiwan";
 // cityButton.click();
 window.onload= function () {cityButton.click()
 }
@@ -103,6 +106,7 @@ cityButton.onclick = () => {
             "@2x.png";
             if(response.daily[i + 1].weather[0].icon == "13d"){
               icons[i].style.filter=" invert(100%)"
+              
             }
         }
         for (let index = 0; index < 4; index++) {
@@ -129,9 +133,19 @@ cityButton.onclick = () => {
       })
       //If style not backgroundimage but just background the cover property wont work !!!!
       .then(function (unsplResponse) {
+        
+        const imgArraySize = unsplResponse.results.length
+        console.log(imgArraySize);
+        const choise = Math.floor(Math.random() * imgArraySize)
+        console.log(choise);
+
         bodyback.style.backgroundImage =
-          "url('" + unsplResponse.results[0].urls.small + ")";
+        "linear-gradient(rgba(255, 255, 255, .7), rgba(255,255,255,0.5)), "+ 
+          "url('" + unsplResponse.results[choise-1].urls.small + ")";
+          feet.textContent = "Unsplash  license : " + unsplResponse.results[choise-1].user.name + "\n" + unsplResponse.results[choise-1].user.links.html
+          
       });
+      
   }
   
 };
@@ -169,6 +183,7 @@ function consts() {
   const dayNames = document.querySelectorAll(".day-name");
   const temperat = document.querySelectorAll(".temperature");
   const icons = document.querySelectorAll(".ic");
+  const feet = document.getElementById('foot');
   return {
     cityButton,
     cityInput,
@@ -182,6 +197,7 @@ function consts() {
     hideIt,
     daypops,
     icons,
+    feet,
   };
 }
 /*
