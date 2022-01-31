@@ -1,5 +1,3 @@
-
-
 import { data } from "./config.js";
 const {
   cityButton,
@@ -25,24 +23,19 @@ window.onload = function () {
   cityButton.click();
 };
 
-// window.onload =fetchTheData("mons")
+// window.onload =fetchTheData("taiwan")
 
-const KeyPressed =(event) => {
+const KeyPressed = (event) => {
   if (event.key === "Enter") {
     event.preventDefault();
     cityButton.click();
   }
-}
-
-
+};
 
 const fetchTheData = () => {
   fetch(
-    "https://api.openweathermap.org/geo/1.0/direct?q=" +
-      cityInput.value +
-      "&limit=1&appid=" +
-      data.key
-  )
+    "https://api.openweathermap.org/geo/1.0/direct?q=" + cityInput.value + "&limit=1&appid=" + data.key 
+    )
     .then(function (responseLat) {
       if (!responseLat.ok) {
         throw new Error(" Biiiiiiiiip " + response.status);
@@ -55,97 +48,71 @@ const fetchTheData = () => {
       nameCity = responseLat[0].name;
       fetchmeteo();
       imgFishing();
-      
     });
+};
 
-  async function fetchmeteo() {
-    fetch(
-      "https://api.openweathermap.org/data/2.5/onecall?lat=" +
-        lat +
-        "&lon=" +
-        lon +
-        "&units=metric&exclude=minutely,alerts&mode=json&appid=" +
-        data.key
-    )
-      .then(function (response) {
-        if (!response.ok) {
-          throw new Error(`HTTP error! Biiiiiiiip status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then(function (response) {
-        //TODO: Should I put the date ?
-        // dating.textContent = currentDate;
-        cityName.textContent = nameCity;
-        today.textContent = parseInt(response.current.temp) + "";
-
-        //4 days names of day
-        for (let i = 0; i < 4; i++) {
-          let dayMax = days - 1 + i;
-          if (dayMax >= 7) {
-            dayMax = dayMax - 7;
-          }
-          dayNames[i].textContent = daysOfWeek[dayMax];
-          temperat[i].textContent =
-            parseInt(response.daily[i + 1].temp.day) + "°";
-        }
-        // 4 days t° results :
-        for (let i = 0; i < 4; i++) {
-          icons[i].src =
-            "https://openweathermap.org/img/wn/" +
-            response.daily[i + 1].weather[0].icon +
-            "@2x.png";
-          if (response.daily[i + 1].weather[0].icon == "13d") {
-            icons[i].style.filter = " invert(100%)";
-          }
-        }
-        //4 days pop results :
-        for (let index = 0; index < 4; index++) {
-          daypops[index].textContent =
-            parseInt(response.daily[index + 1].pop * 100) + " %";
-        }
-        hideIt.style.visibility = "visible";
-      });
+const fetchmeteo = () => {
+  fetch( "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=metric&exclude=minutely,alerts&mode=json&appid=" + data.key )
+    .then(function (response) {
+      if (!response.ok) {
+        throw new Error(`HTTP error! Biiiiiiiip status: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then(function (response) {
+      cityName.textContent = nameCity;
+      today.textContent = parseInt(response.current.temp) + "";
+      fetchNameAndTemperature(response);
+      fetchIcons(response);
+      fetchPop(response);
+      hideIt.style.visibility = "visible";
+    });
+};
+const fetchPop = (response) => {
+  for (let index = 0; index < 4; index++) {
+    daypops[index].textContent = parseInt(response.daily[index + 1].pop * 100) + " %";
   }
+};
 
-  async function imgFishing() {
-    fetch(
-      "https://api.unsplash.com/search/photos?query=" +
-        cityInput.value +
-        "&per_page=20&client_id=" +
-        data.unsplkey
-    )
-      .then(function (unsplResponse) {
-        if (!unsplResponse.ok) {
-          throw new Error(
-            `HTTP error! Biiiiiiiiiiiip status: ${unsplResponse.status}`
-          );
-        }
-        return unsplResponse.json();
-      })
-      //If style not backgroundimage but just background the cover property wont work !!!!
-      .then(function (unsplResponse) {
-        const imgArraySize = unsplResponse.results.length;
-
-        const choise = Math.floor(Math.random() * imgArraySize);
-
-        bodyback.style.backgroundImage =
-          "linear-gradient(rgba(255, 255, 255, .7), rgba(255,255,255,0.5)), " +
-          "url('" +
-          unsplResponse.results[choise - 1].urls.small +
-          ")";
-        feet.textContent =
-          "Unsplash  license : " +
-          unsplResponse.results[choise - 1].user.name +
-          "\n" +
-          unsplResponse.results[choise - 1].user.links.html;
-      });
+const fetchIcons = (response) => {for (let i = 0; i < 4; i++) {
+  icons[i].src = "https://openweathermap.org/img/wn/" + response.daily[i + 1].weather[0].icon + "@2x.png";
+  if (response.daily[i + 1].weather[0].icon == "13d") {
+    icons[i].style.filter = " invert(100%)";
+   }
   }
+};
+const imgFishing = () => {
+  fetch("https://api.unsplash.com/search/photos?query=" + cityInput.value + "&per_page=20&client_id=" + data.unsplkey )
+    .then(function (unsplResponse) {
+      if (!unsplResponse.ok) {
+        throw new Error(
+          `HTTP error! Biiiiiiiiiiiip status: ${unsplResponse.status}`
+        );
+      }
+      return unsplResponse.json();
+    })
+    //If style not backgroundimage but just background the cover property wont work !!!!
+    .then(function (unsplResponse) {
+      const imgArraySize = unsplResponse.results.length;
+      const choise = Math.floor(Math.random() * imgArraySize);
+      bodyback.style.backgroundImage = "linear-gradient(rgba(255, 255, 255, .7), rgba(255,255,255,0.5)), " + "url('" + unsplResponse.results[choise - 1].urls.small + ")";
+      feet.textContent = "Unsplash  license : " + unsplResponse.results[choise - 1].user.name + "\n" + unsplResponse.results[choise - 1].user.links.html; });
+};
+const fetchNameAndTemperature = (response) => {for (let i = 0; i < 4; i++) {
+  let dayMax = days - 1 + i;
+  if (dayMax >= 7) {
+      dayMax = dayMax - 7;
+  }
+  dayNames[i].textContent = daysOfWeek[dayMax];
+  temperat[i].textContent = parseInt(response.daily[i + 1].temp.day) + "°";
+}
+
 };
 
 
 cityInput.addEventListener("keyup", KeyPressed);
-cityButton.addEventListener('click', fetchTheData) //TODO: ADD THE FUNCTION NAME 
+cityButton.addEventListener("click", fetchTheData); 
+
 //TODO: fetch unix time stamp from API to display current time of city researched
 function vars() {
   var todayla = new Date();
