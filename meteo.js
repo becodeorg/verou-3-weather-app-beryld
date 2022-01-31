@@ -2,7 +2,6 @@ import { data } from "./config.js";
 const {
   cityButton,
   cityInput,
-  dating, // let's keep it in case needed to show date
   dayNames,
   cityName,
   today,
@@ -19,11 +18,9 @@ var { lat, lon, nameCity, currentDate, days } = vars();
 //TODO: Format onclick inside a function that is call - able
 
 cityInput.value = "Taiwan";
-window.onload = function () {
-  cityButton.click();
-};
 
-// window.onload =fetchTheData("taiwan")
+
+
 
 const KeyPressed = (event) => {
   if (event.key === "Enter") {
@@ -34,7 +31,7 @@ const KeyPressed = (event) => {
 
 const fetchTheData = () => {
   fetch(
-    "https://api.openweathermap.org/geo/1.0/direct?q=" + cityInput.value + "&limit=1&appid=" + data.key 
+    "https://api.openweathermap.org/geo/1.0/direct?q=" + cityInput.value + "&limit=1&appid=" + data.key
     )
     .then(function (responseLat) {
       if (!responseLat.ok) {
@@ -66,27 +63,29 @@ const fetchmeteo = () => {
       fetchIcons(response);
       fetchPop(response);
       hideIt.style.visibility = "visible";
-    });
+          });
 };
+
 const fetchPop = (response) => {
   for (let index = 0; index < 4; index++) {
     daypops[index].textContent = parseInt(response.daily[index + 1].pop * 100) + " %";
   }
 };
 
-const fetchIcons = (response) => {for (let i = 0; i < 4; i++) {
+const fetchIcons = (response) => {
+  for (let i = 0; i < 4; i++) {
   icons[i].src = "https://openweathermap.org/img/wn/" + response.daily[i + 1].weather[0].icon + "@2x.png";
   if (response.daily[i + 1].weather[0].icon == "13d") {
     icons[i].style.filter = " invert(100%)";
    }
   }
 };
+
 const imgFishing = () => {
   fetch("https://api.unsplash.com/search/photos?query=" + cityInput.value + "&per_page=20&client_id=" + data.unsplkey )
     .then(function (unsplResponse) {
       if (!unsplResponse.ok) {
-        throw new Error(
-          `HTTP error! Biiiiiiiiiiiip status: ${unsplResponse.status}`
+        throw new Error( `HTTP error! Biiiiiiiiiiiip status: ${unsplResponse.status}`
         );
       }
       return unsplResponse.json();
@@ -98,6 +97,7 @@ const imgFishing = () => {
       bodyback.style.backgroundImage = "linear-gradient(rgba(255, 255, 255, .7), rgba(255,255,255,0.5)), " + "url('" + unsplResponse.results[choise - 1].urls.small + ")";
       feet.textContent = "Unsplash  license : " + unsplResponse.results[choise - 1].user.name + "\n" + unsplResponse.results[choise - 1].user.links.html; });
 };
+
 const fetchNameAndTemperature = (response) => {for (let i = 0; i < 4; i++) {
   let dayMax = days - 1 + i;
   if (dayMax >= 7) {
@@ -108,10 +108,12 @@ const fetchNameAndTemperature = (response) => {for (let i = 0; i < 4; i++) {
 }
 
 };
-
-
+// window.onload = function () {
+//   cityButton.click();
+// };
+window.onload = fetchTheData()
 cityInput.addEventListener("keyup", KeyPressed);
-cityButton.addEventListener("click", fetchTheData); 
+cityButton.addEventListener("click", fetchTheData);
 
 //TODO: fetch unix time stamp from API to display current time of city researched
 function vars() {
@@ -134,7 +136,6 @@ function consts() {
   const cityInput = document.getElementById("city");
   const cityButton = document.getElementById("cityButt");
   const today = document.getElementById("current");
-  const dating = document.getElementById("today-date");
   const cityName = document.getElementById("name-city");
   const daypops = document.querySelectorAll(".popic");
   const bodyback = document.getElementById("bodybackA");
@@ -146,7 +147,6 @@ function consts() {
   return {
     cityButton,
     cityInput,
-    dating,
     cityName,
     today,
     dayNames,
@@ -160,5 +160,4 @@ function consts() {
   };
 }
 
-// async function inputStart()
-// {  cityInput.value = ""}
+
