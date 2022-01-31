@@ -2,14 +2,8 @@ import { data } from "./config.js";
 const {
   searchButton,
   cityInput,
-  dayNames,
-  cityName,
-  today,
-  icons,
-  
-  feet,
 } = consts();
-var { lat, lon, nameCity, currentDate, days } = vars();
+
 
 
 cityInput.value = "Taiwan";
@@ -35,15 +29,15 @@ const fetchCoordinates = () => {
       console.log(error)
     })  
     .then(function (responseLat) {
-      lat = responseLat[0].lat;
-      lon = responseLat[0].lon;
-      nameCity = responseLat[0].name;
-      fetchMeteo();
+      let lat = responseLat[0].lat;
+      let lon = responseLat[0].lon;
+      var nameCity = responseLat[0].name;
+      fetchMeteo(lat,lon, nameCity);
       imgFishing();
     });
 };
 
-const fetchMeteo = () => {
+const fetchMeteo = (lat, lon, nameCity) => {
   fetch( "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=metric&exclude=minutely,alerts&mode=json&appid=" + data.key )
     .then(function (response) {
       if (!response.ok) {
@@ -56,8 +50,8 @@ const fetchMeteo = () => {
     })  
     .then(function (response) {
       // const hideIt = document.getElementById("container-results");
-      cityName.textContent = nameCity;
-      today.textContent = parseInt(response.current.temp) + "";
+      document.getElementById("name-city").textContent = nameCity;
+      document.getElementById("current").textContent = parseInt(response.current.temp) + "";
       fetchNameAndTemperature(response);
       fetchIcons(response);
       fetchPrecip(response);
@@ -73,6 +67,7 @@ const fetchPrecip = (response) => {
 };
 
 const fetchIcons = (response) => {
+  const icons = document.querySelectorAll(".ic");
   for (let i = 0; i < 4; i++) {
   icons[i].src = "https://openweathermap.org/img/wn/" + response.daily[i + 1].weather[0].icon + "@2x.png";
   if (response.daily[i + 1].weather[0].icon == "13d") {
@@ -98,17 +93,19 @@ const imgFishing = () => {
       const imgArraySize = unsplashResponse.results.length;
       const choise = Math.floor(Math.random() * imgArraySize);
       document.getElementById("bodybackA").style.backgroundImage = "linear-gradient(rgba(255, 255, 255, .7), rgba(255,255,255,0.5)), " + "url('" + unsplashResponse.results[choise - 1].urls.small + ")";
-      feet.textContent = "Unsplash  license : " + unsplashResponse.results[choise - 1].user.name + "\n" + unsplashResponse.results[choise - 1].user.links.html; });
+      document.getElementById("foot").textContent = "Unsplash  license : " + unsplashResponse.results[choise - 1].user.name + "\n" + unsplashResponse.results[choise - 1].user.links.html; });
    
 };
 
 const fetchNameAndTemperature = (response) => {for (let i = 0; i < 4; i++) {
   const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+  let todayla = new Date();
+  let days = todayla.getDay() + 1;
   let dayMax = days - 1 + i;
   if (dayMax >= 7) {
       dayMax = dayMax - 7;
   }
-  dayNames[i].textContent = daysOfWeek[dayMax];
+  document.querySelectorAll(".day-name")[i].textContent = daysOfWeek[dayMax];
   document.querySelectorAll(".temperature")[i].textContent = parseInt(response.daily[i + 1].temp.day) + "°";
 }
 
@@ -121,34 +118,14 @@ cityInput.addEventListener("keyup", KeyPressed);
 searchButton.addEventListener("click", fetchCoordinates);
 
 //TODO: fetch unix time stamp from API to display current time of city researched
-function vars() {
-  var todayla = new Date();
-  var days = todayla.getDay() + 1;
-  let lat;
-  let lon;
-  let nameCity;
-  return { lat, lon, nameCity, currentDate, days };
-}
+
 
 function consts() {
-  
   const cityInput = document.getElementById("city");
   const searchButton = document.getElementById("cityButt");
-  const today = document.getElementById("current");
-  const cityName = document.getElementById("name-city");
-  
-  const dayNames = document.querySelectorAll(".day-name");
-  const icons = document.querySelectorAll(".ic");
-  const feet = document.getElementById("foot");
-  return {
-    cityInput,
-    searchButton,
-    today,
-    cityName,
-    
-    dayNames,
-    icons,
-    feet,
+    return {
+      cityInput,
+      searchButton,
   };
 }
 
